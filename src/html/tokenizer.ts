@@ -1091,10 +1091,14 @@ export class Tokenizer {
             this.startToken("HTMLTagClose")
             return "DATA"
         }
-
         if (cp === EOF) {
             this.reportParseError("eof-in-tag")
             return "DATA"
+        }
+        if (cp === LEFT_CURLY_BRACKET) {
+            this.returnState = "AFTER_ATTRIBUTE_NAME"
+            this.setStartTokenMark()
+            return "TWIG_EXPRESSION"
         }
 
         this.startToken("HTMLIdentifier")
