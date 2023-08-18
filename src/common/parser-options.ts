@@ -59,7 +59,8 @@ export function isSFCFile(parserOptions: ParserOptions) {
     if (parserOptions.filePath === "<input>") {
         return true
     }
-    return path.extname(parserOptions.filePath || "unknown.vue") === ".vue"
+    // @ts-ignore
+    return ['.vue', '.twig'].includes(path.extname(parserOptions.filePath || "unknown.vue"));
 }
 
 /**
